@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Chat Room</title>
+        <link rel="stylesheet" href="/css/style.css" />
+        <link rel="icon" href="favicon.jpg" type="image/jpeg" />
+        <script src="/socket.io/socket.io.js">//loads socket.io</script>
+
+        <link rel="preconnect" href="https://fonts.gstatic.com">
+        <link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,300;1,300&display=swap" rel="stylesheet">
+        
+    </head>
+    <body>
+        <header class="rotate" id="roomName"> Test writing</header>
+        <ul id="messageBoard">
+            
+        </ul>
+
+        <div>
+            <input id="name" autocomplete="off" autocapitalize="words" placeholder="Anonymous" />
+
+            <input id="message" autocomplete="off" autocapitalize="on" placeholder="Message" />
+            <button id="messageIn" onclick="add()">Send</button>
+        </div>
+
+        <script defer>
+            //loads script after html
+
+            //initializes socket.io
+            const socket = io();
+
+            //gets the room from the URL
+            const room = window.location.pathname;
+
+            document.getElementById("roomName").innerHTML = room.replace('/', "");
+
+            //listens for messages for that room
+            socket.on('messageOut'+ room, text => {
+
+                //creates a list element and puts it at the top(bottom) of unordered list
+                const el = document.createElement('li');
+                el.innerHTML = text;
+                document.getElementById("messageBoard").insertBefore(el, document.getElementById("messageBoard").firstChild);
+            });
+
+            //when the send button is clicked it will send a new packet
+            document.getElementById('messageIn').onclick = () => {
+
+                //gets values from inputs
+                const text = document.getElementById('message').value.trim();
+                const name = document.getElementById('name').value.trim() || "Anonymous";
+
+                //as long as the text isn't empty it will send a packet back to the server
+                if(text != ""){
+                    socket.emit('message', {name: name, message: text, room: room});
+                }
+            }
+            
+
+            //if the user hits enter it will call the onclick method
+            document.getElementById('message').onkeydown = (event) => {
+                if(event.keyCode == 13){
+                    document.getElementById('messageIn').onclick();
+                }
+            }
+
+        </script>
+    </body>
+</html>
