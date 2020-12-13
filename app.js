@@ -1,5 +1,6 @@
 //requires express and initializes app server
 const express = require('express');
+const helmet = require('helmet');
 const app = express();
 
 // requires path
@@ -15,6 +16,8 @@ const io = require('socket.io')(http, {
 
 //creates a static folder that will allow the browser to load everything from public folder
 app.use(express.static(path.join(__dirname, 'public')));
+
+app.use(helmet);
 
 //allows the user to type in whatever id they want and still load the page
 app.get('/:id', (req, res) => {
