@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Chat Room</title>
+        <link rel="stylesheet" href="/css/style.css" />
+        <link rel="icon" href="favicon.jpg" type="image/jpeg" />
+        <script src="/socket.io/socket.io.js">//loads socket.io</script>
+
+        <link rel="preconnect" href="https://fonts.gstatic.com">
+        <link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,300;1,300&display=swap" rel="stylesheet">
+        
+    </head>
+    <body>
+        <header class="rotate" id="roomName"> Test writing</header>
+        <ul id="messageBoard">
+            
+        </ul>
+
+        <div>
+            <input id="name" autocomplete="off" autocapitalize="words" placeholder="Anonymous" />
+
+            <input id="message" autocomplete="off" autocapitalize="on" placeholder="Message" />
+            <button id="messageIn" onclick="add()">Send</button>
+        </div>
+
+        <script src="/js/main.js" defer></script>
+    </body>
+</html>
