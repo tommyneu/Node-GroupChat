@@ -3,12 +3,12 @@
     <head>
         <title>Chat Room</title>
         <link rel="stylesheet" href="/css/style.css" />
-        <link rel="icon" href="favicon.jpg" type="image/jpeg" />
-        <script src="/socket.io/socket.io.js">//loads socket.io</script>
-
+        
         <link rel="preconnect" href="https://fonts.gstatic.com">
         <link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,300;1,300&display=swap" rel="stylesheet">
         
+        <script src="/socket.io/socket.io.js">//loads socket.io</script>
+        <script src="/js/main.js" defer></script>
     </head>
     <body>
         <header class="rotate" id="roomName"> Test writing</header>
@@ -23,6 +23,5 @@
             <button id="messageIn" onclick="add()">Send</button>
         </div>
 
-        <script src="/js/main.js" defer></script>
     </body>
 </html>
